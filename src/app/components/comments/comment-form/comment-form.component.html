@@ -1,1 +1,32 @@
-<p>comment-form works!</p>
+<div class="comment-form-wrapper">
+    <div class="replying-to">
+        <div *ngIf="!editComment; else editFlow">Replying to...</div>
+        <ng-template #editFlow>
+            <div>Editing comment...</div>
+        </ng-template>
+        <div *ngIf="replyParent; else mainThread" class="user-details">
+            <div class="user">
+                <div class="avatar">{{replyParent.user.charAt(0) | uppercase}}</div>
+                <div>{{replyParent.user}}</div>
+                <span class="cancel" title="cancel" (click)="cancelEditOrReply()">x</span>
+            </div>
+            <div class="text">
+                {{replyParent.text}}
+            </div>
+        </div>
+        <ng-template #mainThread>
+            <b>Main thread</b>
+        </ng-template>
+    </div>
+    <form class="comment-form" [formGroup]="commentForm" (ngSubmit)="saveComment()">
+        <div class="form-control">
+            <label for="username">Username: </label>
+            <input id="username" type="text" formControlName="username">
+        </div>
+        <div class="form-control">
+            <label for="comment">Comment: </label>
+            <textarea rows="3" maxlength="100" id="comment" type="text" formControlName="comment"></textarea>
+        </div>
+        <button [disabled]="!commentForm.valid" class="submit-btn" type="submit">{{editComment ? 'Update Comment' : 'Add comment'}}</button>
+      </form>
+</div>

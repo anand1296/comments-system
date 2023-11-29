@@ -1,1 +1,11 @@
-<p>comments-list works!</p>
+<div class="main-container">
+    <div class="comment-form-main">
+        <app-comment-form [replyParent]="replyParent" [editComment]="isEdit" (addComment$)="addComment($event)" (editComment$)="editComment($event)"></app-comment-form>
+    </div>
+    <div class="comments-list-main">
+        <ng-container *ngFor="let comment of (commentsList | filterRootComments); trackBy: commentTrackBy">
+            <app-comment [comment]="comment" [replies]="getReplies(comment.id)" (addComment)="onAddComment($event)"
+                (editComment)="onEditComment($event)" (deleteComment)="onDeleteComment($event)"></app-comment>
+        </ng-container>
+    </div>
+</div>

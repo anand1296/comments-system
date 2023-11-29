@@ -1,1 +1,19 @@
-<p>comment works!</p>
+<div class="comment-wrapper" [id]="comment.id">
+    <div class="user">
+        <div class="avatar">{{comment.user.charAt(0) | uppercase}}</div>
+        <div>{{comment.user}}</div>
+    </div>
+    <div class="text">
+        {{comment.text}}
+    </div>
+    <div class="actions" (click)="onAction($event, comment)">
+        <small>Reply</small>
+        <small>Edit</small>
+        <small *ngIf="!getReplies(comment.id).length">Delete</small>
+    </div>
+    <div class="replies" *ngIf="replies?.length">
+        <ng-container *ngFor="let reply of replies; trackBy: replyTrackBy">
+            <app-comment [comment]="reply" [replies]="getReplies(reply.id)" (addComment)="onAddComment($event)" (editComment)="onEditComment($event)" (deleteComment)="onDeleteComment($event)"></app-comment>
+        </ng-container>
+    </div>
+</div>
