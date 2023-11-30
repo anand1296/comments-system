@@ -46,7 +46,7 @@ export class CommentsListComponent implements OnInit {
   addComment(comment: __Comment) {
     this.commentsService.addComment(comment).subscribe((data) => {
       // console.log(data);
-      this.commentsList = [...this.commentsList, comment];
+      this.commentsList = [...this.commentsList, data];
       this.dataService.setComments(this.commentsList);
       setTimeout(() => {
         const element = document.getElementById(comment.id);
@@ -66,8 +66,8 @@ export class CommentsListComponent implements OnInit {
     this.commentsService.editComment(comment).subscribe((data) => {
       // console.log(data);
       this.commentsList = this.commentsList.map((item) => {
-        if(item.id === comment.id) {
-          return comment;
+        if(item.id === data.id) {
+          return data;
         }
         else return item;
       });
