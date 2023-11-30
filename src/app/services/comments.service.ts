@@ -28,7 +28,7 @@ export class CommentsService {
 
   editComment(comment: __Comment): Observable<__Comment> {
     return this.httpClient.patch<__Comment>(
-      `${this.BASE_URL}/${comment.id}`, {text: comment.text}, {headers: this.headers}
+      `${this.BASE_URL}/${comment.id}`, {text: comment.text, timestamp: comment.timestamp}, {headers: this.headers}
     );
   }
 

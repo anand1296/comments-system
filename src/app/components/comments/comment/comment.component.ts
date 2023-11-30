@@ -28,28 +28,28 @@ export class CommentComponent implements OnInit {
   }
 
   onAction(event: MouseEvent, comment: __Comment) {
-    const {target} = event;
+    const { target } = event;
     const action = (target as HTMLDivElement).textContent?.toLowerCase() ?? '';
     // console.log(action);
-    if(action.length) {
-      switch(action) {
-        case 'reply' : this.onAddComment(comment); break;
-        case 'edit' : this.onEditComment(comment); break;
-        case 'delete' : this.onDeleteComment(comment); break;
+    if (action.length) {
+      switch (action) {
+        case 'reply': this.onAddComment(comment); break;
+        case 'edit': this.onEditComment(comment); break;
+        case 'delete': this.onDeleteComment(comment); break;
         default: console.log('invalid action');
       }
     }
   }
 
-  onAddComment(comment: __Comment){
+  onAddComment(comment: __Comment) {
     this.addComment.emit(comment);
   }
 
-  onEditComment(comment: __Comment){
+  onEditComment(comment: __Comment) {
     this.editComment.emit(comment);
   }
 
-  onDeleteComment(comment: __Comment){
+  onDeleteComment(comment: __Comment) {
     this.deleteComment.emit(comment);
   }
 
@@ -58,7 +58,14 @@ export class CommentComponent implements OnInit {
   }
 
   public getTime(timestamp: Date) {
-    return new Date(timestamp).toLocaleDateString();
+    const date = new Date(timestamp);
+    const time = new Intl.DateTimeFormat('default',
+      {
+        hour12: true,
+        hour: 'numeric',
+        minute: 'numeric'
+      }).format(date);
+    return date.toDateString() + ',  ' + time;
   }
 
 }
