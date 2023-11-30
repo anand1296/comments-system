@@ -57,4 +57,8 @@ export class CommentComponent implements OnInit {
     return this.dataService.getComments().filter((comment) => comment.parentId === id);
   }
 
+  public getTime(timestamp: Date) {
+    return new Date(timestamp).toLocaleDateString();
+  }
+
 }

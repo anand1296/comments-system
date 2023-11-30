@@ -6,6 +6,9 @@
     <div class="text">
         {{comment.text}}
     </div>
+    <div class="timestamp">
+        {{getTime(comment.timestamp)}}
+    </div>
     <div class="actions" (click)="onAction($event, comment)">
         <small>Reply</small>
         <small>Edit</small>
